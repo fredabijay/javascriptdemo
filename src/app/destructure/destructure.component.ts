@@ -12,6 +12,8 @@ export class DestructureComponent implements OnInit {
   ngOnInit(): void {
     this.destructureWorker(this.worker);
     this.destructureWorkers(this.workers);
+    const {country:{cities:[{name:firstCity},{name:secondCity},{name:thirdcity}]}} = this.fetchCountries();
+    console.log({firstCity, secondCity, thirdcity});
   }
 
   readonly worker = { id: 1, name: 'shannon', age:48, address: { city:'baltimore' }}
@@ -33,5 +35,19 @@ export class DestructureComponent implements OnInit {
       const {name, address:{city}} = x;
       console.log(name + ' ' + city);
     })
+  }
+
+  public fetchCountries() {
+    return {
+      country: {
+        name:'Ukraine',
+        capital:'Kyiv',
+        cities: [ 
+          { name:'Mariupol' },
+          { name:'Kyiv' },
+          { name:'Donetsk' },
+        ]
+      }
+    }
   }
 }
